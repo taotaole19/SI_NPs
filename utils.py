@@ -53,19 +53,14 @@ class Context_Encoder(nn.Module):
         self.emb_c_modules.append(get_act(act_type))
         self.context_net=nn.Sequential(*self.emb_c_modules)
         
-        self.mu_net=nn.Linear(hidden_size, output_size) # map [x_tr,x_te,[x_tr,y_tr]]->z_c to local l.v. z_*
-        self.logvar_net=nn.Linear(hidden_size, output_size) # map [x_tr,x_te,[x_tr,y_tr]]->z_t to local l.v. z_*
+        self.mu_net=nn.Linear(hidden_size, output_size) 
+        self.logvar_net=nn.Linear(hidden_size, output_size) 
     
     def forward(self,x,mean_dim=1):
         # input x in the form [x_c,y_c]
         out=self.context_net(x)
         out=torch.mean(out,dim=mean_dim)
         mu, logvar=self.mu_net(out),self.logvar_net(out)
-        
-        '''
-        print (logvar.min())
-        print (logvar.max()) 
-        '''
         
         return (mu,logvar)    
         
