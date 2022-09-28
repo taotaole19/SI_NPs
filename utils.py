@@ -1,6 +1,3 @@
-'''
-This file is to record some modules in implementations.
-'''
 
 import torch
 import torch.nn as nn
@@ -13,10 +10,6 @@ import numpy as np
 
 
 def get_act(act_type):
-    '''
-    Get activation layer for neural networks.
-    '''
-    
     if act_type=='ReLU':
         return nn.ReLU()
     elif act_type=='LeakyReLU':
@@ -30,18 +23,12 @@ def get_act(act_type):
     
 
 def set_global_seeds(i):
-    '''
-    get all random related packages fixed with a seed.
-    '''
     np.random.seed(i)
     random.seed(i)
     torch.manual_seed(i)
     
 
 class Context_Encoder(nn.Module):
-    '''
-    Encoder network for [x_c, y_c]
-    '''
     def __init__(self, input_size, hidden_size, act_type, num_layers, output_size):
         super(Context_Encoder, self).__init__()
         
