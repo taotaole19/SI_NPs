@@ -1,3 +1,7 @@
+'''
+This file is to prepare image dataset for meta training tasks. 
+The mission is to address image completion problems.
+'''
 
 import numpy as np
 import random
@@ -19,7 +23,7 @@ from torchvision.transforms import transforms as trans
 
 
 ##########################################################################################################################
-    # data preprocessing/loaders for cifar10 and svhn dataset
+    # data preprocessing/loaders for cifar10 and celeba dataset
 ##########################################################################################################################
 
 def cifar10_metadataset(dir_root='../data',b_size=4):
@@ -81,5 +85,6 @@ def idx_to_x(idx, batch_size):
     x = torch.index_select(x_grid, dim=1, index=idx)
     x = x.expand(batch_size, -1, -1)
     return x
+
 
 
