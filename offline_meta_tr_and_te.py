@@ -59,8 +59,8 @@ def train_meta_net(epoch,
         loss.backward()
         net_optim.step()
 
-        epoch_train_nll.append(b_avg_nll.data)
-
+        epoch_train_nll.append(b_avg_nll.data.cpu())
+   
     avg_tr_nll = np.array(epoch_train_nll).sum() / len(train_loader)
 
     return avg_tr_nll   
@@ -110,8 +110,8 @@ def eval_meta_net(epoch,
             else:
                 raise NotImplementedError()
             
-            epoch_test_nll.append(b_avg_nll)
-            epoch_test_mse.append(b_avg_mse)
+            epoch_test_nll.append(b_avg_nll.cpu())
+            epoch_test_mse.append(b_avg_mse.cpu())
 
     avg_te_nll = np.array(epoch_test_nll).sum() /len(eval_loader)
     avg_te_mse = np.array(epoch_test_mse).sum() /len(eval_loader)
